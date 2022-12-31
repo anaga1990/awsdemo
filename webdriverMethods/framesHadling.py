@@ -1,0 +1,21 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+cp = webdriver.ChromeOptions()
+cp.add_experimental_option("detach", True)
+driver = webdriver.Chrome(options=cp)
+driver.maximize_window()
+driver.implicitly_wait(10)
+driver.get("https://demo.automationtesting.in/Frames.html")
+driver.switch_to.frame(0)
+driver.find_element(By.XPATH, "//input[@type='text']").send_keys("nagaga")
+driver.quit()
+driver = webdriver.Chrome(options=cp)
+driver.maximize_window()
+driver.get("https://demo.automationtesting.in/Frames.html")
+driver.find_element(By.XPATH, "//a[normalize-space()='Iframe with in an Iframe']").click()
+driver.switch_to.frame(driver.find_element(By.XPATH, "//iframe[@src='MultipleFrames.html']"))
+driver.switch_to.frame(0)
+driver.find_element(By.XPATH, "//input[@type='text']").send_keys("testJAJAJAA")
+driver.switch_to.default_content()
+driver.find_element(By.CSS_SELECTOR, "a[href='Index.html']").click()
